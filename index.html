@@ -1,96 +1,48 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Chalk</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css"/>
-  <link rel="stylesheet" href="css/base.css"/>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Chalk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css"/>
+<link rel="stylesheet" href="css/base.css"/>
 </head>
 <body>
 
-<!-- ═══ NAV ═══════════════════════════════════════════════════════════ -->
 <nav>
   <div class="nav-inner">
     <div class="nav-brand">CHALK</div>
     <div class="nav-tabs">
-      <button class="nav-tab active" onclick="window._app.showPage('dashboard')">
-        <i class="ti ti-layout-dashboard" style="font-size:13px;vertical-align:-1px;margin-right:3px"></i>오늘
-      </button>
-      <button class="nav-tab" onclick="window._app.showPage('students')">
-        <i class="ti ti-users" style="font-size:13px;vertical-align:-1px;margin-right:3px"></i>학생 관리
-      </button>
-      <button class="nav-tab" onclick="window._app.showPage('curriculum')">
-        <i class="ti ti-books" style="font-size:13px;vertical-align:-1px;margin-right:3px"></i>커리큘럼
-      </button>
-      <button class="nav-tab" onclick="window._app.showPage('lessons')">
-        <i class="ti ti-notebook" style="font-size:13px;vertical-align:-1px;margin-right:3px"></i>수업 기록
-      </button>
-      <button class="nav-tab" onclick="window._app.showPage('homework')">
-        <i class="ti ti-checklist" style="font-size:13px;vertical-align:-1px;margin-right:3px"></i>숙제
-      </button>
-      <button class="nav-tab" onclick="window._app.showPage('payments')">
-        <i class="ti ti-coin" style="font-size:13px;vertical-align:-1px;margin-right:3px"></i>수납 관리
-      </button>
+      <button class="nav-tab active" onclick="window._app.showPage('dashboard')"><i class="ti ti-layout-dashboard" style="font-size:13px;vertical-align:-1px;margin-right:3px"></i>Today</button>
+      <button class="nav-tab" onclick="window._app.showPage('students')"><i class="ti ti-users" style="font-size:13px;vertical-align:-1px;margin-right:3px"></i>Students</button>
+      <button class="nav-tab" onclick="window._app.showPage('sessions')"><i class="ti ti-notebook" style="font-size:13px;vertical-align:-1px;margin-right:3px"></i>Sessions & Homework</button>
+      <button class="nav-tab" onclick="window._app.showPage('payments')"><i class="ti ti-coin" style="font-size:13px;vertical-align:-1px;margin-right:3px"></i>Payments</button>
+      <button class="nav-tab" onclick="window._app.showPage('curriculum')"><i class="ti ti-books" style="font-size:13px;vertical-align:-1px;margin-right:3px"></i>Curriculum</button>
     </div>
-    <div class="nav-right">
-      <span id="nav-date" class="nav-date"></span>
-    </div>
+    <div class="nav-right"><span id="nav-date" class="nav-date"></span></div>
   </div>
 </nav>
 
-<!-- ═══ DASHBOARD ══════════════════════════════════════════════════════ -->
+<!-- ═══ DASHBOARD ══════════════════════════════════════════════════ -->
 <div id="page-dashboard" class="page active">
-
-  <!-- Stat cards -->
   <div class="stat-grid">
-    <div class="stat-card green">
-      <div class="stat-label">활성 학생</div>
-      <div class="stat-val" id="stat-students">—</div>
-      <div class="stat-sub">명</div>
-    </div>
-    <div class="stat-card blue">
-      <div class="stat-label">오늘 수업</div>
-      <div class="stat-val" id="stat-today">—</div>
-      <div class="stat-sub">회</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-label">이번 달 수업</div>
-      <div class="stat-val" id="stat-month-lessons">—</div>
-      <div class="stat-sub">회 누적</div>
-    </div>
-    <div class="stat-card amber">
-      <div class="stat-label">이번 달 예상 수업료</div>
-      <div class="stat-val" id="stat-expected" style="font-size:16px">—</div>
-    </div>
-    <div class="stat-card red">
-      <div class="stat-label">미납 합계</div>
-      <div class="stat-val" id="stat-unpaid" style="font-size:16px;color:var(--danger)">—</div>
-    </div>
+    <div class="stat-card green"><div class="stat-label">Active students</div><div class="stat-val" id="stat-students">—</div><div class="stat-sub">students</div></div>
+    <div class="stat-card blue"><div class="stat-label">Today's lessons</div><div class="stat-val" id="stat-today">—</div><div class="stat-sub">scheduled</div></div>
+    <div class="stat-card"><div class="stat-label">This month lessons</div><div class="stat-val" id="stat-month-lessons">—</div><div class="stat-sub">completed</div></div>
+    <div class="stat-card amber"><div class="stat-label">Monthly expected</div><div class="stat-val" id="stat-expected" style="font-size:16px">—</div></div>
+    <div class="stat-card red"><div class="stat-label">Unpaid total</div><div class="stat-val" id="stat-unpaid" style="font-size:16px;color:var(--danger)">—</div></div>
   </div>
 
-  <!-- Row 1: Today's schedule + Payment progress -->
-  <div style="display:grid;grid-template-columns:1fr 280px;gap:16px;margin-bottom:16px">
-
-    <!-- Today's lessons -->
+  <div style="display:grid;grid-template-columns:1fr 280px;gap:16px;margin-bottom:14px">
     <div class="card">
-      <div class="card-title">
-        <span><i class="ti ti-calendar-event" style="font-size:13px;vertical-align:-1px;margin-right:4px"></i>오늘 수업 일정</span>
-        <button class="btn btn-sm btn-primary" onclick="window._app.showPage('lessons')">
-          <i class="ti ti-plus" style="font-size:12px"></i> 수업 추가
-        </button>
+      <div class="card-title"><span><i class="ti ti-calendar-event" style="font-size:12px;margin-right:4px"></i>Today's lesson schedule</span>
+        <button class="btn btn-sm btn-primary" onclick="window._sessions.openAdd()"><i class="ti ti-plus" style="font-size:12px"></i> Add lesson</button>
       </div>
       <div id="today-schedule"></div>
     </div>
-
-    <!-- Monthly payment progress -->
     <div class="card">
-      <div class="card-title">
-        <span><i class="ti ti-chart-pie" style="font-size:13px;vertical-align:-1px;margin-right:4px"></i>이번 달 수납 현황</span>
-      </div>
-      <!-- Progress bar -->
+      <div class="card-title"><span><i class="ti ti-chart-pie" style="font-size:12px;margin-right:4px"></i>This month — payment status</span></div>
       <div style="margin-bottom:10px">
         <div style="height:8px;background:var(--surface-2);border-radius:99px;overflow:hidden;margin-bottom:5px">
           <div id="pay-progress-bar" style="height:100%;background:var(--accent);border-radius:99px;transition:width .4s;width:0%"></div>
@@ -98,80 +50,188 @@
         <div id="pay-progress-label" style="font-size:11px;color:var(--text-3);font-family:var(--mono)"></div>
       </div>
       <hr class="divider"/>
-      <div style="font-size:11px;font-weight:600;color:var(--text-3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px">미납 / 부분 납부</div>
+      <div style="font-size:10px;font-weight:600;color:var(--text-3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px">Unpaid / Partial</div>
       <div id="unpaid-list"></div>
     </div>
-
   </div>
 
-  <!-- Row 2: Payment table + Overdue homework -->
-  <div style="display:grid;grid-template-columns:1fr 320px;gap:16px;margin-bottom:16px">
-
-    <!-- Full payment table -->
+  <div style="display:grid;grid-template-columns:1fr 320px;gap:16px;margin-bottom:14px">
     <div class="card">
-      <div class="card-title">
-        <span><i class="ti ti-receipt" style="font-size:13px;vertical-align:-1px;margin-right:4px"></i>이번 달 수납 전체 현황</span>
-        <button class="btn btn-sm" onclick="window._app.showPage('payments')">전체 보기</button>
+      <div class="card-title"><span><i class="ti ti-receipt" style="font-size:12px;margin-right:4px"></i>Monthly payment overview</span>
+        <button class="btn btn-sm" onclick="window._app.showPage('payments')">Full view</button>
       </div>
       <div id="payment-overview"></div>
     </div>
-
-    <!-- Overdue homework -->
     <div class="card">
-      <div class="card-title">
-        <span><i class="ti ti-alert-triangle" style="font-size:13px;vertical-align:-1px;margin-right:4px;color:var(--danger)"></i>미제출 숙제</span>
-        <button class="btn btn-sm" onclick="window._app.showPage('homework')">전체 보기</button>
+      <div class="card-title"><span style="color:var(--danger)"><i class="ti ti-alert-triangle" style="font-size:12px;margin-right:4px"></i>Overdue homework</span>
+        <button class="btn btn-sm" onclick="window._app.showPage('sessions')">View all</button>
       </div>
       <div id="overdue-homework"></div>
     </div>
-
   </div>
 
-  <!-- Row 3: Recent lessons -->
   <div class="card">
-    <div class="card-title">
-      <span><i class="ti ti-history" style="font-size:13px;vertical-align:-1px;margin-right:4px"></i>최근 수업 기록</span>
-      <button class="btn btn-sm" onclick="window._app.showPage('lessons')">전체 보기</button>
+    <div class="card-title"><span><i class="ti ti-history" style="font-size:12px;margin-right:4px"></i>Recent lessons</span>
+      <button class="btn btn-sm" onclick="window._app.showPage('sessions')">View all</button>
     </div>
     <div id="recent-lessons"></div>
   </div>
+</div>
 
-</div><!-- /page-dashboard -->
-
-
-<!-- ═══ OTHER PAGES (placeholder) ════════════════════════════════════ -->
+<!-- ═══ STUDENTS ═══════════════════════════════════════════════════ -->
 <div id="page-students" class="page">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+    <div style="font-size:18px;font-weight:600">Students</div>
+    <button class="btn btn-primary" onclick="window._students.openAdd()"><i class="ti ti-plus" style="font-size:13px"></i> Add student</button>
+  </div>
   <div class="card">
-    <div class="card-title">학생 관리</div>
-    <p style="color:var(--text-3);font-size:13px;text-align:center;padding:40px">Coming soon — 학생 추가 / 수정 / 삭제</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Name</th><th>Korean</th><th>Parent / Contact</th><th>Schedule</th><th>Duration</th><th>Rate/lesson</th><th>Payment type</th><th>Notes</th><th>Actions</th></tr></thead>
+        <tbody id="students-table-body"></tbody>
+      </table>
+    </div>
   </div>
 </div>
 
+<!-- ═══ SESSIONS & HOMEWORK ════════════════════════════════════════ -->
+<div id="page-sessions" class="page">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:10px">
+    <div style="font-size:18px;font-weight:600">Sessions & Homework</div>
+    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+      <select id="session-filter-student" onchange="window._sessions.setFilter('studentId',this.value)" style="width:180px;font-size:12px;padding:5px 10px">
+        <option value="">All students</option>
+      </select>
+      <input type="month" id="session-filter-month" onchange="window._sessions.setFilter('month',this.value)" style="width:150px;font-size:12px;padding:5px 10px"/>
+      <button class="btn btn-primary" onclick="window._sessions.openAdd()"><i class="ti ti-plus" style="font-size:13px"></i> Add lesson</button>
+    </div>
+  </div>
+  <div id="sessions-list"></div>
+</div>
+
+<!-- ═══ PAYMENTS ════════════════════════════════════════════════════ -->
+<div id="page-payments" class="page">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:10px">
+    <div style="font-size:18px;font-weight:600">Payments — <span id="pm-month-label"></span></div>
+    <input type="month" id="pm-month" onchange="window._pay.setMonth(this.value)" style="width:160px;font-size:12px;padding:5px 10px"/>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px">
+    <div class="stat-card amber"><div class="stat-label">Expected</div><div class="stat-val" id="pm-stat-expected" style="font-size:16px">—</div></div>
+    <div class="stat-card green"><div class="stat-label">Collected</div><div class="stat-val" id="pm-stat-paid" style="font-size:16px">—</div></div>
+    <div class="stat-card red"><div class="stat-label">Remaining</div><div class="stat-val" id="pm-stat-unpaid" style="font-size:16px;color:var(--danger)">—</div></div>
+    <div class="stat-card gray"><div class="stat-label">Cancelled lessons</div><div class="stat-val" id="pm-stat-cancel" style="font-size:16px">—</div></div>
+  </div>
+
+  <!-- Progress bar -->
+  <div class="card" style="margin-bottom:14px">
+    <div style="height:10px;background:var(--surface-2);border-radius:99px;overflow:hidden;margin-bottom:6px">
+      <div id="pm-bar" style="height:100%;background:var(--accent);border-radius:99px;transition:width .4s;width:0%"></div>
+    </div>
+    <div id="pm-bar-label" style="font-size:12px;color:var(--text-3);font-family:var(--mono)"></div>
+  </div>
+
+  <!-- Student summary table -->
+  <div class="card" style="margin-bottom:16px">
+    <div class="card-title">Summary by student
+      <div style="display:flex;gap:6px;font-size:10px;font-weight:400">
+        <span class="badge status-paid">Paid</span>
+        <span class="badge status-partial">Partial</span>
+        <span class="badge status-unpaid">Unpaid</span>
+        <span class="badge status-cancelled">Cancelled</span>
+        <span class="badge status-prepaid">Prepaid</span>
+        <span class="badge status-postpay">Post-pay</span>
+      </div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Student</th><th>Lessons</th><th>Cancelled</th><th>Expected</th><th>Paid</th><th>Remaining</th><th>Status</th><th>Actions</th></tr></thead>
+        <tbody id="pm-table-body"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Lesson-by-lesson breakdown -->
+  <div class="card">
+    <div class="card-title">Lesson-by-lesson breakdown</div>
+    <div id="pm-lesson-list"></div>
+  </div>
+</div>
+
+<!-- ═══ CURRICULUM ══════════════════════════════════════════════════ -->
 <div id="page-curriculum" class="page">
   <div class="card">
-    <div class="card-title">커리큘럼 플래너</div>
-    <p style="color:var(--text-3);font-size:13px;text-align:center;padding:40px">Coming soon — 월별 커리큘럼 스프레드시트</p>
+    <div class="card-title">Curriculum Planner</div>
+    <p style="color:var(--text-3);font-size:13px;text-align:center;padding:40px">Coming soon — monthly curriculum spreadsheet</p>
   </div>
 </div>
 
-<div id="page-lessons" class="page">
-  <div class="card">
-    <div class="card-title">수업 기록</div>
-    <p style="color:var(--text-3);font-size:13px;text-align:center;padding:40px">Coming soon — 수업 입력 / 학부모 노트 자동 생성</p>
+<!-- ═══ STUDENT MODAL ══════════════════════════════════════════════ -->
+<div class="modal-overlay" id="student-modal">
+  <div class="modal-box">
+    <div class="modal-title" id="student-modal-title">Add Student</div>
+    <div class="field-row c2">
+      <div class="field"><label>English name</label><input id="sf-name" type="text" placeholder="e.g. Bella"/></div>
+      <div class="field"><label>Korean name</label><input id="sf-korean" type="text" placeholder="e.g. 태은"/></div>
+    </div>
+    <div class="field-row c2">
+      <div class="field"><label>Parent name</label><input id="sf-parent" type="text" placeholder="e.g. 태은맘"/></div>
+      <div class="field"><label>Contact</label><input id="sf-contact" type="text" placeholder="010-0000-0000"/></div>
+    </div>
+    <div class="field"><label>Regular schedule</label><input id="sf-schedule" type="text" placeholder="e.g. Mon 4pm, Wed 5pm"/></div>
+    <div class="field-row c3">
+      <div class="field"><label>Duration (hours)</label><input id="sf-duration" type="number" min="0.5" max="4" step="0.5" value="1" oninput="window._students.calcRate()"/></div>
+      <div class="field"><label>Rate per lesson (₩)</label><input id="sf-rate" type="number" min="0" step="5000" value="40000"/></div>
+      <div class="field"><label>Payment type</label>
+        <select id="sf-paytype"><option value="postpay">Post-pay</option><option value="prepay">Prepay</option></select>
+      </div>
+    </div>
+    <div class="field"><label>Payment aliases (comma-separated, for bank matching)</label><input id="sf-aliases" type="text" placeholder="e.g. 태은, bella, 태은맘"/></div>
+    <div class="field"><label>Notes</label><input id="sf-notes" type="text" placeholder="Any notes…"/></div>
+    <div class="modal-btns">
+      <button class="btn" onclick="window._students.close()">Cancel</button>
+      <button class="btn btn-primary" onclick="window._students.save()">Save student</button>
+    </div>
   </div>
 </div>
 
-<div id="page-homework" class="page">
-  <div class="card">
-    <div class="card-title">숙제 관리</div>
-    <p style="color:var(--text-3);font-size:13px;text-align:center;padding:40px">Coming soon — 숙제 현황 / 미제출 관리</p>
-  </div>
-</div>
-
-<div id="page-payments" class="page">
-  <div class="card">
-    <div class="card-title">수납 관리</div>
-    <p style="color:var(--text-3);font-size:13px;text-align:center;padding:40px">Coming soon — 수납 현황 / 문자 발송 / 은행 내역 매칭</p>
+<!-- ═══ LESSON MODAL ════════════════════════════════════════════════ -->
+<div class="modal-overlay" id="lesson-modal">
+  <div class="modal-box">
+    <div class="modal-title" id="lesson-modal-title">Add Lesson</div>
+    <div class="field-row c2">
+      <div class="field"><label>Student</label>
+        <select id="lf-student" onchange="window._sessions.autoFillRate()"><option value="">Select student…</option></select>
+      </div>
+      <div class="field"><label>Date</label><input id="lf-date" type="date"/></div>
+    </div>
+    <div class="field-row c3">
+      <div class="field"><label>Duration (hr)</label><input id="lf-duration" type="number" min="0.5" max="4" step="0.5" value="1"/></div>
+      <div class="field"><label>Amount charged (₩)</label><input id="lf-amount" type="number" min="0" step="5000" value="40000"/></div>
+      <div class="field"><label>Payment status</label>
+        <select id="lf-status">
+          <option value="unpaid">Unpaid</option>
+          <option value="paid">Paid</option>
+          <option value="partial">Partial</option>
+          <option value="prepaid">Prepaid</option>
+          <option value="postpay">Post-pay</option>
+          <option value="cancelled">Cancelled</option>
+        </select>
+      </div>
+    </div>
+    <div class="field"><label>Topic</label><input id="lf-topic" type="text" placeholder="e.g. Being a Kid"/></div>
+    <div class="field-row c2">
+      <div class="field"><label>Books read</label><input id="lf-books" type="text" placeholder="e.g. The Giving Tree"/></div>
+      <div class="field"><label>Workbook</label><input id="lf-workbook" type="text" placeholder="e.g. Write Right 1"/></div>
+    </div>
+    <div class="field"><label>Grammar</label><input id="lf-grammar" type="text" placeholder="e.g. Past tense, Scholastic…"/></div>
+    <div class="field"><label>Homework assigned</label><input id="lf-homework" type="text" placeholder="e.g. Write Right p.12-13"/></div>
+    <div class="field"><label>Teacher's note</label><textarea id="lf-teacher-note" rows="2" placeholder="Internal notes…"></textarea></div>
+    <div class="field"><label>Cancel reason (if cancelled)</label><input id="lf-cancel" type="text" placeholder="e.g. Student sick"/></div>
+    <div class="modal-btns">
+      <button class="btn" onclick="window._sessions.closeLesson()">Cancel</button>
+      <button class="btn btn-primary" onclick="window._sessions.saveLesson()">Save lesson</button>
+    </div>
   </div>
 </div>
 
