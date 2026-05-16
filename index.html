@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chalk</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css"/>
+  <link rel="stylesheet" href="css/base.css"/>
+</head>
+<body>
+
+<!-- ═══ NAV ═══════════════════════════════════════════════════════════ -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-brand">CHALK</div>
+    <div class="nav-tabs">
+      <button class="nav-tab active" onclick="window._app.showPage('dashboard')">
+        <i class="ti ti-layout-dashboard" style="font-size:13px;vertical-align:-1px;margin-right:3px"></i>오늘
+      </button>
+      <button class="nav-tab" onclick="window._app.showPage('students')">
+        <i class="ti ti-users" style="font-size:13px;vertical-align:-1px;margin-right:3px"></i>학생 관리
+      </button>
+      <button class="nav-tab" onclick="window._app.showPage('curriculum')">
+        <i class="ti ti-books" style="font-size:13px;vertical-align:-1px;margin-right:3px"></i>커리큘럼
+      </button>
+      <button class="nav-tab" onclick="window._app.showPage('lessons')">
+        <i class="ti ti-notebook" style="font-size:13px;vertical-align:-1px;margin-right:3px"></i>수업 기록
+      </button>
+      <button class="nav-tab" onclick="window._app.showPage('homework')">
+        <i class="ti ti-checklist" style="font-size:13px;vertical-align:-1px;margin-right:3px"></i>숙제
+      </button>
+      <button class="nav-tab" onclick="window._app.showPage('payments')">
+        <i class="ti ti-coin" style="font-size:13px;vertical-align:-1px;margin-right:3px"></i>수납 관리
+      </button>
+    </div>
+    <div class="nav-right">
+      <span id="nav-date" class="nav-date"></span>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══ DASHBOARD ══════════════════════════════════════════════════════ -->
+<div id="page-dashboard" class="page active">
+
+  <!-- Stat cards -->
+  <div class="stat-grid">
+    <div class="stat-card green">
+      <div class="stat-label">활성 학생</div>
+      <div class="stat-val" id="stat-students">—</div>
+      <div class="stat-sub">명</div>
+    </div>
+    <div class="stat-card blue">
+      <div class="stat-label">오늘 수업</div>
+      <div class="stat-val" id="stat-today">—</div>
+      <div class="stat-sub">회</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">이번 달 수업</div>
+      <div class="stat-val" id="stat-month-lessons">—</div>
+      <div class="stat-sub">회 누적</div>
+    </div>
+    <div class="stat-card amber">
+      <div class="stat-label">이번 달 예상 수업료</div>
+      <div class="stat-val" id="stat-expected" style="font-size:16px">—</div>
+    </div>
+    <div class="stat-card red">
+      <div class="stat-label">미납 합계</div>
+      <div class="stat-val" id="stat-unpaid" style="font-size:16px;color:var(--danger)">—</div>
+    </div>
+  </div>
+
+  <!-- Row 1: Today's schedule + Payment progress -->
+  <div style="display:grid;grid-template-columns:1fr 280px;gap:16px;margin-bottom:16px">
+
+    <!-- Today's lessons -->
+    <div class="card">
+      <div class="card-title">
+        <span><i class="ti ti-calendar-event" style="font-size:13px;vertical-align:-1px;margin-right:4px"></i>오늘 수업 일정</span>
+        <button class="btn btn-sm btn-primary" onclick="window._app.showPage('lessons')">
+          <i class="ti ti-plus" style="font-size:12px"></i> 수업 추가
+        </button>
+      </div>
+      <div id="today-schedule"></div>
+    </div>
+
+    <!-- Monthly payment progress -->
+    <div class="card">
+      <div class="card-title">
+        <span><i class="ti ti-chart-pie" style="font-size:13px;vertical-align:-1px;margin-right:4px"></i>이번 달 수납 현황</span>
+      </div>
+      <!-- Progress bar -->
+      <div style="margin-bottom:10px">
+        <div style="height:8px;background:var(--surface-2);border-radius:99px;overflow:hidden;margin-bottom:5px">
+          <div id="pay-progress-bar" style="height:100%;background:var(--accent);border-radius:99px;transition:width .4s;width:0%"></div>
+        </div>
+        <div id="pay-progress-label" style="font-size:11px;color:var(--text-3);font-family:var(--mono)"></div>
+      </div>
+      <hr class="divider"/>
+      <div style="font-size:11px;font-weight:600;color:var(--text-3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px">미납 / 부분 납부</div>
+      <div id="unpaid-list"></div>
+    </div>
+
+  </div>
+
+  <!-- Row 2: Payment table + Overdue homework -->
+  <div style="display:grid;grid-template-columns:1fr 320px;gap:16px;margin-bottom:16px">
+
+    <!-- Full payment table -->
+    <div class="card">
+      <div class="card-title">
+        <span><i class="ti ti-receipt" style="font-size:13px;vertical-align:-1px;margin-right:4px"></i>이번 달 수납 전체 현황</span>
+        <button class="btn btn-sm" onclick="window._app.showPage('payments')">전체 보기</button>
+      </div>
+      <div id="payment-overview"></div>
+    </div>
+
+    <!-- Overdue homework -->
+    <div class="card">
+      <div class="card-title">
+        <span><i class="ti ti-alert-triangle" style="font-size:13px;vertical-align:-1px;margin-right:4px;color:var(--danger)"></i>미제출 숙제</span>
+        <button class="btn btn-sm" onclick="window._app.showPage('homework')">전체 보기</button>
+      </div>
+      <div id="overdue-homework"></div>
+    </div>
+
+  </div>
+
+  <!-- Row 3: Recent lessons -->
+  <div class="card">
+    <div class="card-title">
+      <span><i class="ti ti-history" style="font-size:13px;vertical-align:-1px;margin-right:4px"></i>최근 수업 기록</span>
+      <button class="btn btn-sm" onclick="window._app.showPage('lessons')">전체 보기</button>
+    </div>
+    <div id="recent-lessons"></div>
+  </div>
+
+</div><!-- /page-dashboard -->
+
+
+<!-- ═══ OTHER PAGES (placeholder) ════════════════════════════════════ -->
+<div id="page-students" class="page">
+  <div class="card">
+    <div class="card-title">학생 관리</div>
+    <p style="color:var(--text-3);font-size:13px;text-align:center;padding:40px">Coming soon — 학생 추가 / 수정 / 삭제</p>
+  </div>
+</div>
+
+<div id="page-curriculum" class="page">
+  <div class="card">
+    <div class="card-title">커리큘럼 플래너</div>
+    <p style="color:var(--text-3);font-size:13px;text-align:center;padding:40px">Coming soon — 월별 커리큘럼 스프레드시트</p>
+  </div>
+</div>
+
+<div id="page-lessons" class="page">
+  <div class="card">
+    <div class="card-title">수업 기록</div>
+    <p style="color:var(--text-3);font-size:13px;text-align:center;padding:40px">Coming soon — 수업 입력 / 학부모 노트 자동 생성</p>
+  </div>
+</div>
+
+<div id="page-homework" class="page">
+  <div class="card">
+    <div class="card-title">숙제 관리</div>
+    <p style="color:var(--text-3);font-size:13px;text-align:center;padding:40px">Coming soon — 숙제 현황 / 미제출 관리</p>
+  </div>
+</div>
+
+<div id="page-payments" class="page">
+  <div class="card">
+    <div class="card-title">수납 관리</div>
+    <p style="color:var(--text-3);font-size:13px;text-align:center;padding:40px">Coming soon — 수납 현황 / 문자 발송 / 은행 내역 매칭</p>
+  </div>
+</div>
+
+<script type="module" src="js/app.js"></script>
+</body>
+</html>
